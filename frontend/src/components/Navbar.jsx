@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import { auth, db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import SettingsModal from "./SettingsModal";
+import logo from "../assets/logo.png";   // ✅ Correct logo import
 
-function Navbar({ onSettingsToggle}) {
+function Navbar({ onSettingsToggle }) {
 
   const [showSettings, setShowSettings] = useState(false);
   const [name, setName] = useState("User");
@@ -23,7 +24,6 @@ function Navbar({ onSettingsToggle}) {
       const user = auth.currentUser;
 
       if (user) {
-
         try {
 
           const docRef = doc(db, "users", user.uid);
@@ -39,13 +39,11 @@ function Navbar({ onSettingsToggle}) {
 
             localStorage.setItem("username", username);
             localStorage.setItem("exam", examType);
-
           }
 
         } catch (error) {
           console.log("Error fetching user:", error);
         }
-
       }
 
     };
@@ -58,7 +56,7 @@ function Navbar({ onSettingsToggle}) {
     <div className="navbar">
 
       <div className="logo-section">
-        <img src="../src/assets/logo.png" alt="Eduseal Logo" className="logo" />
+        <img src={logo} alt="Eduseal Logo" className="logo" />
         <h3 className="app-title">EDUSEAL TUTOR</h3>
       </div>
 
